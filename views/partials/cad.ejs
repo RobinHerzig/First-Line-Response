@@ -1,0 +1,159 @@
+<!-- <link rel="stylesheet" href="css/style.css"> -->
+<script defer type="text/javascript" src="js/main.js"></script>
+
+<section class="flexColumn CAD">
+    <nav class="menu">
+        <ul class="menuList flexRow">
+            <li>
+                <button type="submit" id="newCall">New Call</button>
+                <form action="/demo/createCall" method="POST">
+                    <button type="submit" id="newCall">New Call</button>
+                </form>
+            </li>
+            <!-- <li>
+                <form action="/viewCall" method="GET">
+                    <input type="submit" value="Previous Calls" disabled>
+                </form>
+            </li>
+            <li>
+                <form action="/newPerson" method="GET">
+                    <input type="submit" value="Person" disabled>
+                </form>
+            </li>
+            <li>
+                <form action="/newVehicle" method="GET">
+                    <input type="submit" value="Vehicle" disabled>
+                </form>
+            </li>
+            <li>
+                <form action="/MDT" method="GET">
+                    <input type="submit" value="MDT" disabled>
+                </form>
+            </li> -->
+        </ul>
+    </nav>
+    <section class="flexRow">
+        <section class="callList">
+            <h2>Call List</h2>
+            <ul>
+                <% // Populate call list %>
+                    <% for (let i=0; i < info.length; i++) { %>
+                        <li>
+                            <button value="<%= info[i]._id %>" class="activeCall">
+                                <span class="callListTime">
+                                    <%= info[i].time %>
+                                </span>
+                                <span class="callListLocation">
+                                    <%= info[i].location %>
+                                </span>
+                                <span class="callListType">
+                                    <%= info[i].type %>
+                                </span>
+                            </button>
+                        </li>
+                        <% } %>
+            </ul>
+        </section>
+        <main class="selectedCall">
+            <form action="/demo/saveSelectedCall/?_method=PUT" method="POST">
+                <section class="callInfo">
+                    <fieldset>
+                        <legend>Call Information</legend>
+                        <label for="date">Date:</label>
+                        <input type="text" placeholder="Date" name="date" class="callInfoData" id="date" readonly>
+                        <label for="time">Time:</label>
+                        <input type="text" placeholder="Time" name="time" class="callInfoData" id="time" readonly>
+                        <label for="id">ID:</label>
+                        <input type="text" placeholder="ID" name="id" class="callInfoData" id="id" readonly>
+                    </fieldset>
+                </section>
+                <section class="callLocation">
+                    <fieldset>
+                        <legend>Call Location</legend>
+                        <label for="business">Business Name:</label>
+                        <input type="text" placeholder="Business" name="business" class="callInfoData" id="business">
+                        <label for="address">Address:</label>
+                        <input type="text" placeholder="Address" name="address" class="callInfoData" id="address">
+                        <label for="city">City:</label>
+                        <input type="text" placeholder="City" name="city" class="callInfoData" id="city">
+                    </fieldset>
+                </section>
+                <section class="callType">
+                    <fieldset>
+                        <legend>Call Type</legend>
+                        <label for="type">Type:</label>
+                        <input type="text" placeholder="Type" name="type" class="callInfoData" id="type">
+                    </fieldset>
+                </section>
+                <section class="callNotes">
+                    <fieldset>
+                        <legend>Notes</legend>
+                        <ol name="notes" class="callInfoData" id="callNotes">
+                            <li>Hello</li>
+                        </ol>
+                        <!-- <label for="newNote">Notes:</label> -->
+                        <input type="text" placeholder="Notes" name="newNote" class="callInfoData" id="newNote">
+                    </fieldset>
+                </section>
+                <section class="responseDepartment">
+                    <fieldset>
+                        <legend>Department Response</legend>
+                        <table id="departmentResponseTable" class="flexRow">
+                            <tr>
+                                <th>Apparatus</th>
+                                <th>Tone</th>
+                                <th>En Route</th>
+                                <th>Arrival</th>
+                                <th>Departure</th>
+                                <th>Quarters</th>
+                            </tr>
+                            <tr class="apparatusRow">
+                                <td><input type="text" placeholder="Apparatus" name="apparatus"
+                                        class="callInfoData apparatus" id="apparatus1"></td>
+                                <td><input type="text" placeholder="Tone" name="tone" class="callInfoData tone"
+                                        id="tone1"></td>
+                                <td><input type="text" placeholder="En Route" name="enroute" class="callInfoData"
+                                        id="enroute1"></td>
+                                <td><input type="text" placeholder="Arrival" name="arrival" class="callInfoData"
+                                        id="arrival1"></td>
+                                <td><input type="text" placeholder="Departure" name="departure" class="callInfoData"
+                                        id="departure1"></td>
+                                <td><input type="text" placeholder="Quarters" name="quarters" class="callInfoData"
+                                        id="quarters1"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </section>
+                <section class="responseOther">
+                    <fieldset>
+                        <legend>Other Notifications</legend>
+                        <label for="contact">Contact:</label>
+                        <input type="text" placeholder="Contact" name="contact" class="callInfoData" id="contact">
+                        <label for="page">Page:</label>
+                        <input type="time" placeholder="Page" name="page" class="callInfoData" id="page">
+                        <label for="notify">Notify:</label>
+                        <input type="time" placeholder="Notify" name="notify" class="callInfoData" id="notify">
+                    </fieldset>
+                </section>
+                <section class="callerInfo">
+                    <fieldset>
+                        <legend>Caller Information</legend>
+                        <label for="first">First Name:</label>
+                        <input type="text" placeholder="First Name" name="first" class="callInfoData" id="first">
+                        <label for="last">Last Name:</label>
+                        <input type="text" placeholder="Last Name" name="last" class="callInfoData" id="last">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" placeholder="Phone Number" name="phone" class="callInfoData" id="phone">
+                    </fieldset>
+                </section>
+                <section>
+                    <fieldset>
+                        <button id="saveCallButton">Save Call</button>
+                        <button id="deleteCallButton" formaction="/demo/deleteSelectedCall/?_method=DELETE">Delete Call</button>
+                    </fieldset>
+                </section>
+            </form>
+
+        </main>
+    </section>
+</section>
