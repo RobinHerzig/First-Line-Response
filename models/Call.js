@@ -22,15 +22,9 @@ const calls = new mongoose.Schema({
   callNotes: {
     type: Array,
   },
-  // apparatus: {
-  //   type: String,
-  // },
-  // contacts: {
-  //   type: String,
-  // },
-  // caller: {
-  //   type: String,
-  // }, 
+  apparatus: {
+    type: Array,
+  },
   first: {
     type: String,
   },

@@ -8,7 +8,7 @@ module.exports = {
             console.log('Getting demo')
             res.render('demo.ejs', { info: data })
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
     },
     // notLoggedIn: (req, res) => {
@@ -30,7 +30,6 @@ module.exports = {
     displaySelectedCall: async (req, res) => {
         try {
             const data = await Call.find({})
-            console.log(data)
             console.log('Displaying selected call')
             res.json(data)
         } catch (err) {
@@ -52,15 +51,72 @@ module.exports = {
                         last: req.body.last,
                         phone: req.body.phone,
                     },
-                    $push: {
-                        callNotes: (`${new Date().toLocaleTimeString('en-US', { hour12: false })}: ${req.body.newNote}`),
-                    }
                 }
-            );
+            )
+            if (req.body.newNote) { // Seperate update for array, or else it will push empty timestamp
+                await Call.updateOne(
+                    { _id: req.body.id },
+                    {
+                        $push: {
+                            callNotes: (`${new Date().toLocaleTimeString('en-US', { hour12: false })}: ${req.body.newNote}`),
+                        }
+                    }
+                )
+            }
+
+            // const apparatusObject = {}
+            // const apparatusFields = ['apparatus', 'tone', 'enroute', 'arrival', 'departure', 'quarters']
+
+            // console.log(req.body)
+            // for (let property in req.body) {
+            //     if (apparatusFields.includes(property) && req.body[property]) {
+            //         apparatusObject[property] = req.body[property]
+            //     }
+            // }
+            // console.log(apparatusObject)
+
+
+            // [{ apparatus: '', tone: '', enroute: '' },
+            // { apparatus1: '', tone1: '', enroute1: '' },
+            //     { apparatus2: '', tone2: '', enroute2: '' }]
+
+            
+
+            console.log(req.body.apparatus)
+            console.log(req.body.apparatus.length) 
+
+            let apparatus = {}
+            for (let i = 1; i < req.body.apparatus.length; i++) {
+                if (i === 0) {
+                    apparatus['apparatus' + i] = { apparatus: req.body.apparatus || '', tone: req.body.tone || '', enroute: req.body.enroute || '', arrival: req.body.arrival || '', departure: req.body.departure || '', quarters: req.body.quarters || ''}
+                }
+                // else {
+                //     apparatus[i] = {apparatus: req.body.apparatus[i], tone: req.body.tone[i], enroute: req.body.enroute[i], arrival: req.body.arrival[i], departure: req.body.departure[i], quarters: req.body.quarters[i]}
+                // }
+            }
+
+            console.log(apparatus)
+
+
+            // const apparatus = { apparatus: '', tone: '', enroute: '' }
+            // const apparatus1 = { apparatus1: '', tone1: '', enroute1: '' }
+
+
+
+            if (true) { // Seperate update for array, or else it will push empty timestamp
+                await Call.updateOne(
+                    { _id: req.body.id },
+                    {
+                        $set: {
+                            apparatus: req.body.apparatus
+                        }
+                    }
+                )
+            }
             console.log('Saved selected call')
             res.redirect('/demo')
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
     },
     deleteSelectedCall: async (req, res) => {
@@ -70,7 +126,7 @@ module.exports = {
             console.log('Deleted selected call')
             res.redirect('/demo')
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
     },
 }

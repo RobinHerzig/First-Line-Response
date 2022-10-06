@@ -99,7 +99,7 @@ const addApparatusRow = async function (info) {
 
     let apparatusRow = document.querySelectorAll('.apparatusRow')
     let apparatusRowArray = Array.from(apparatusRow) // Calculate how many rows already exist in the DOM
-    let apparatusCount = 0
+    let apparatusCount = 0 
     while (info['apparatus' + (apparatusCount + 1)]) { // Calculate how many rows will be needed by counting non-empty aparatus values
         apparatusCount += 1
     }
