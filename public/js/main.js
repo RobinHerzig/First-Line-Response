@@ -41,7 +41,10 @@ async function displaySelectedCall() {
                         }
                     }
                     else if (elem.className.includes('response')) {
-                        elem.value = info[i].apparatus[0][elem.id] || null
+                        let idNumber = elem.id.split('').filter(elem => (Number(elem) >= 0 || Number(elem) <= 9)).join('') // Split element ID name and number to use for parsing database return
+                        let idName = elem.id.split('').filter(elem => (elem.toLowerCase() >= 'a' && elem.toLowerCase() <= 'z')).join('')
+                        console.log(info[i]?.response[idNumber - 1]?.[idName] || '')
+                        elem.value = info[i].response[idNumber - 1]?.[idName] || ''
                     }
                     else if (info[i].hasOwnProperty(elem.id)) {
                         elem.value = info[i][elem.id] // If the database has a key that matches an element id, the value of the key is used as the value of the element
@@ -105,10 +108,16 @@ const addApparatusRow = async function (info) {
 
     let apparatusRow = document.querySelectorAll('.apparatusRow')
     let apparatusRowArray = Array.from(apparatusRow) // Calculate how many rows already exist in the DOM
-    let apparatusCount = info.apparatus.length
-    while (info['apparatus' + (apparatusCount + 1)]) { // Calculate how many rows will be needed by counting non-empty aparatus values
+    let apparatusCount = 0
+    
+    while (info.response[apparatusCount]?.apparatus) { // Calculate how many rows will be needed by counting non-empty aparatus values
         apparatusCount += 1
     }
+
+
+    // while (info['apparatus' + (apparatusCount + 1)]) { // Calculate how many rows will be needed by counting non-empty aparatus values
+    //     apparatusCount += 1
+    // }
 
     try {
         if (apparatusRowArray.length === apparatusCount + 1) return // If there are already the correct number of rows, return without making changes
@@ -140,12 +149,12 @@ const addApparatusRow = async function (info) {
 const trackApparatusTimes = function () {
     const checkEmptyCells = function (elem) {
         if (elem.childNodes[1].childNodes[0].value) {
-            elem.childNodes[1].childNodes[0].setAttribute('disabled', '') // For each row, if there is an apparatus saved, disable the apparatus cell
+            elem.childNodes[1].childNodes[0].setAttribute('readonly', '') // For each row, if there is an apparatus saved, disable the apparatus cell
             let cellCount = 3
             while (elem.childNodes[cellCount]?.childNodes[0]) {
                 let cell = elem.childNodes[cellCount].childNodes[0]
-                if (!cell.value) cell.removeAttribute('disabled') // For each timestamp cell in this row, enable cell if it does not contain a time
-                else cell.setAttribute('disabled', '') // For each timestamp cell in this row, disable cell if it does contain a time
+                if (!cell.value) cell.removeAttribute('readonly') // For each timestamp cell in this row, enable cell if it does not contain a time
+                else cell.setAttribute('readonly', '') // For each timestamp cell in this row, disable cell if it does contain a time
                 cell.addEventListener('click', function () { timeStamp(cell); }) // For each cell in this row, apply timestamp function
                 cellCount += 2
             }
@@ -154,22 +163,22 @@ const trackApparatusTimes = function () {
                 cellCount -= 2
                 let cell = elem.childNodes[cellCount].childNodes[0]
                 if (cell.value) disableLeft = true
-                if (disableLeft) cell.setAttribute('disabled', '') // Reiterate backwards, and when a cell with time is found, all timestamp cells to the left are disabled
+                if (disableLeft) cell.setAttribute('readonly', '') // Reiterate backwards, and when a cell with time is found, all timestamp cells to the left are disabled
             }
         }
         else {
-            elem.childNodes[1].childNodes[0].removeAttribute('disabled') // For each row, if there is not an apparatus saved, enable the apparatus cell
+            elem.childNodes[1].childNodes[0].removeAttribute('readonly') // For each row, if there is not an apparatus saved, enable the apparatus cell
             let cellCount = 3
             while (elem.childNodes[cellCount]?.childNodes[0]) {
                 let cell = elem.childNodes[cellCount].childNodes[0]
-                cell.setAttribute('disabled', '') // For each timestamp cell in this row, disable cell
+                cell.setAttribute('readonly', '') // For each timestamp cell in this row, disable cell
                 cellCount += 2
             }
         }
     }
     const timeStamp = function (cell) {
         cell.value = new Date().toLocaleTimeString('en-US', { hour12: false })
-        cell.setAttribute('disabled', '') // Disable cell after add timestamp
+        cell.setAttribute('readonly', '') // Disable cell after add timestamp
     }
 
     let apparatusRow = document.querySelectorAll('.apparatusRow')

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ApparatusSchema = new mongoose.Schema({ 
+const ResponseSchema = new mongoose.Schema({ 
   apparatus: String,
   tone: String,
   enroute: String,
@@ -9,7 +9,7 @@ const ApparatusSchema = new mongoose.Schema({
   quarters: String,
 });
 
-const calls = new mongoose.Schema({
+const Calls = new mongoose.Schema({
   date: {
     type: String,
   },
@@ -31,8 +31,8 @@ const calls = new mongoose.Schema({
   callNotes: {
     type: Array,
   },
-  apparatus: {
-    type: [ApparatusSchema],
+  response: {
+    type: [ResponseSchema],
   },
   first: {
     type: String,
@@ -46,4 +46,4 @@ const calls = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('calls', calls)
+module.exports = {Call: mongoose.model('calls', Calls), ResponseSchema: mongoose.model('response', ResponseSchema)}
