@@ -21,14 +21,13 @@ async function displaySelectedCall() {
         highlightSelectedCall(info) // Highlight selected call in call list
         for (let i = 0; i < info.length; i++) {
             if (info[i]._id == idSessionStorage) {
-                console.log(info[i])
                 addApparatusRow(info[i]) // Add additional apparatus rows, if necessary 
                 const callInfoData = document.querySelectorAll('.callInfoData')
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually
                     }
-                    else if (elem.id === "callNotes") {
+                    else if (elem.id === 'callNotes') {
                         const callNotes = document.querySelector('#callNotes')
                         Array.from(callNotes.childNodes).forEach(elem => elem.remove()) // Delete call notes from previous displayed call
                         if (info[i].callNotes) {
@@ -41,7 +40,13 @@ async function displaySelectedCall() {
                             }
                         }
                     }
+                    else if (elem.className.includes('response')) {
+                        elem.value = info[i].apparatus[0][elem.id] || null
+                    }
                     else if (info[i].hasOwnProperty(elem.id)) {
+                        elem.value = info[i][elem.id] // If the database has a key that matches an element id, the value of the key is used as the value of the element
+                    }
+                    else if (Array.isArray(info[i])) {
                         elem.value = info[i][elem.id] // If the database has a key that matches an element id, the value of the key is used as the value of the element
                     }
                     else {
@@ -85,6 +90,7 @@ const addApparatusRow = async function (info) {
         for (let i = 1; i < clone.childNodes.length; i += 2) {
             let id = clone.childNodes[i].childNodes[0].id
             clone.childNodes[i].childNodes[0].id = incrementId(id)
+            clone.childNodes[i].childNodes[0].name = incrementId(id)
         }
     }
     const incrementId = function (id) { // Increment id numbers
@@ -99,7 +105,7 @@ const addApparatusRow = async function (info) {
 
     let apparatusRow = document.querySelectorAll('.apparatusRow')
     let apparatusRowArray = Array.from(apparatusRow) // Calculate how many rows already exist in the DOM
-    let apparatusCount = 0 
+    let apparatusCount = info.apparatus.length
     while (info['apparatus' + (apparatusCount + 1)]) { // Calculate how many rows will be needed by counting non-empty aparatus values
         apparatusCount += 1
     }
@@ -165,6 +171,7 @@ const trackApparatusTimes = function () {
         cell.value = new Date().toLocaleTimeString('en-US', { hour12: false })
         cell.setAttribute('disabled', '') // Disable cell after add timestamp
     }
+
     let apparatusRow = document.querySelectorAll('.apparatusRow')
     Array.from(apparatusRow).forEach(elem => checkEmptyCells(elem))
 }

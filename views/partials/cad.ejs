@@ -88,9 +88,7 @@
                 <section class="callNotes">
                     <fieldset>
                         <legend>Notes</legend>
-                        <ol name="notes" class="callInfoData" id="callNotes">
-                            <li>Hello</li>
-                        </ol>
+                        <ol name="notes" class="callInfoData" id="callNotes"></ol>
                         <!-- <label for="newNote">Notes:</label> -->
                         <input type="text" placeholder="Notes" name="newNote" class="callInfoData" id="newNote">
                     </fieldset>
@@ -108,18 +106,18 @@
                                 <th>Quarters</th>
                             </tr>
                             <tr class="apparatusRow">
-                                <td><input type="text" placeholder="Apparatus" name="apparatus"
-                                        class="callInfoData apparatus" id="apparatus1"></td>
-                                <td><input type="text" placeholder="Tone" name="tone" class="callInfoData tone"
-                                        id="tone1"></td>
-                                <td><input type="text" placeholder="En Route" name="enroute" class="callInfoData"
-                                        id="enroute1"></td>
-                                <td><input type="text" placeholder="Arrival" name="arrival" class="callInfoData"
-                                        id="arrival1"></td>
-                                <td><input type="text" placeholder="Departure" name="departure" class="callInfoData"
-                                        id="departure1"></td>
-                                <td><input type="text" placeholder="Quarters" name="quarters" class="callInfoData"
-                                        id="quarters1"></td>
+                                <td><input type="text" placeholder="Apparatus" name="apparatus1"
+                                        class="callInfoData apparatus response" id="apparatus1"></td>
+                                <td><input type="text" placeholder="Tone" name="tone1" class="callInfoData response tone"
+                                        id="tone1" disabled></td>
+                                <td><input type="text" placeholder="En Route" name="enroute1" class="callInfoData response"
+                                        id="enroute1" disabled></td>
+                                <td><input type="text" placeholder="Arrival" name="arrival1" class="callInfoData response"
+                                        id="arrival1" disabled></td>
+                                <td><input type="text" placeholder="Departure" name="departure1" class="callInfoData response"
+                                        id="departure1" disabled></td>
+                                <td><input type="text" placeholder="Quarters" name="quarters1" class="callInfoData response"
+                                        id="quarters1" disabled></td>
                             </tr>
                         </table>
                     </fieldset>
@@ -149,7 +147,8 @@
                 <section>
                     <fieldset>
                         <button id="saveCallButton">Save Call</button>
-                        <button id="deleteCallButton" formaction="/demo/deleteSelectedCall/?_method=DELETE">Delete Call</button>
+                        <button id="deleteCallButton" formaction="/demo/deleteSelectedCall/?_method=DELETE">Delete
+                            Call</button>
                     </fieldset>
                 </section>
             </form>
