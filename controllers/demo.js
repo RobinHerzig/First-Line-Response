@@ -64,12 +64,16 @@ module.exports = {
                 )
             }
 
+            // pull info to add to it, then resubmit?
+            // const data = await Call.find({apparatus})
+            // console.log(data)
+
             let responseDepartmentTypes = ['apparatus', 'tone', 'enroute', 'arrival', 'departure', 'quarters']
             let responseDepartment = {}
             debugger
             for (let property in req.body) {
                 console.log(property)
-                if (responseDepartmentTypes.map(elem => property.includes(elem)).includes(true)) {
+                if (responseDepartmentTypes.map(elem => property.includes(elem)).includes(true) && property.length > 0) {
                     responseDepartment[property] = req.body[property]
                 }
             }
@@ -82,7 +86,7 @@ module.exports = {
                 await Call.updateOne(
                     { _id: req.body.id },
                     {
-                        $push: {
+                        $addToSet: {
                             apparatus: responseDepartment
                         }
                     }

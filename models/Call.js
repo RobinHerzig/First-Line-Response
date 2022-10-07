@@ -1,5 +1,14 @@
 const mongoose = require('mongoose')
 
+const ApparatusSchema = new mongoose.Schema({ 
+  apparatus: String,
+  tone: String,
+  enroute: String,
+  arrival: String,
+  departure: String,
+  quarters: String,
+});
+
 const calls = new mongoose.Schema({
   date: {
     type: String,
@@ -23,7 +32,7 @@ const calls = new mongoose.Schema({
     type: Array,
   },
   apparatus: {
-    type: Array,
+    type: [ApparatusSchema],
   },
   first: {
     type: String,
