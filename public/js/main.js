@@ -9,9 +9,8 @@ Array.from(activeCalls).forEach(elem => elem.addEventListener('click', displaySe
 
 async function displaySelectedCall() {
     const id = this.value
-    if (id) {
-        sessionStorage.setItem('id', id) // Set this id to sessionStorage, so the selected call can be displayed on page load
-    }
+    if (id) sessionStorage.setItem('id', id) // Set this id to sessionStorage, so the selected call can be displayed on page load
+    else if (sessionStorage.getItem('id') === null) sessionStorage.setItem('id', Array.from(activeCalls)[activeCalls.length - 1].value) // If no active call id exists in storage, automatically set id of the newest call. Necessary for newly added call to automatically show active or prevent blank form when deleting call
     const idSessionStorage = sessionStorage.getItem('id')
     try {
         const res = await fetch('/demo/displaySelectedCall', {
@@ -43,7 +42,6 @@ async function displaySelectedCall() {
                     else if (elem.className.includes('response')) {
                         let idNumber = elem.id.split('').filter(elem => (Number(elem) >= 0 || Number(elem) <= 9)).join('') // Split element ID name and number to use for parsing database return
                         let idName = elem.id.split('').filter(elem => (elem.toLowerCase() >= 'a' && elem.toLowerCase() <= 'z')).join('')
-                        console.log(info[i]?.response[idNumber - 1]?.[idName] || '')
                         elem.value = info[i].response[idNumber - 1]?.[idName] || ''
                     }
                     else if (info[i].hasOwnProperty(elem.id)) {
@@ -109,7 +107,7 @@ const addApparatusRow = async function (info) {
     let apparatusRow = document.querySelectorAll('.apparatusRow')
     let apparatusRowArray = Array.from(apparatusRow) // Calculate how many rows already exist in the DOM
     let apparatusCount = 0
-    
+
     while (info.response[apparatusCount]?.apparatus) { // Calculate how many rows will be needed by counting non-empty aparatus values
         apparatusCount += 1
     }
@@ -177,7 +175,8 @@ const trackApparatusTimes = function () {
         }
     }
     const timeStamp = function (cell) {
-        cell.value = new Date().toLocaleTimeString('en-US', { hour12: false })
+        if (!cell.hasAttribute('readonly'))
+            cell.value = new Date().toLocaleTimeString('en-US', { hour12: false })
         cell.setAttribute('readonly', '') // Disable cell after add timestamp
     }
 
@@ -185,79 +184,15 @@ const trackApparatusTimes = function () {
     Array.from(apparatusRow).forEach(elem => checkEmptyCells(elem))
 }
 
-/*
-
 // Create a new call
 
 const newCallButton = document.querySelector("#newCall")
-newCallButton.addEventListener('click', createCall)
+const deleteCallButton = document.querySelector("#deleteCallButton")
+newCallButton.addEventListener('click', removeSessionStorage)
+deleteCallButton.addEventListener('click', removeSessionStorage)
 
-async function createCall() {
-    try {
-        const res = await fetch('/demo/createCall', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-          })
-        const data = await res.json()
-        const id = data.insertedId
-        if (id) {
-            sessionStorage.setItem('id', id) // Sets new id to sessionStorage, so the new call will be active on reload
-        }
-        window.location.reload(true);
-    }
-    catch(err) {
-        console.log(err)
+function removeSessionStorage() {
+    if (id) {
+        sessionStorage.removeItem('id') // Sets new id to sessionStorage, so the new call will be active on reload
     }
 }
-
-// Save selected call
-
-const saveCallButton = document.querySelector('#saveCallButton')
-saveCallButton.addEventListener('click', saveSelectedCall)
-
-async function saveSelectedCall() {
-    try {
-        const callInfoDataObject = {}
-        const callInfoData = document.querySelectorAll('.callInfoData')
-        Array.from(callInfoData).forEach(elem => {
-            if (elem.id !== 'callNotes') {
-                callInfoDataObject[elem.id] = elem.value // Populates object with properties and values from the active call form
-            }
-        })
-        const res = await fetch('/demo/saveSelectedCall', {
-            method: 'put',
-            // headers: {'Content-Type': 'application/json'},
-            // body: JSON.stringify(callInfoDataObject)  
-        })
-        console.log('trying to save client side')
-        const data = await res.json()
-    }
-    catch(err) {
-        console.log(err)
-    }
-}
-
-// Delete selected call
-
-const deleteCallButton = document.querySelector('#deleteCallButton')
-deleteCallButton.addEventListener('click', deleteSelectedCall)
-
-async function deleteSelectedCall() {
-    const id = document.querySelector('#id').value
-    try {
-        const response = await fetch('/demo/deleteSelectedCall', {
-            method: 'delete',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              'id': id,
-            })
-          })
-        const data = await response.json()
-        window.location.reload(true);
-    }
-    catch(err) {
-        console.log(err)
-    }
-}
-
-*/

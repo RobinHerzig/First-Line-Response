@@ -1,8 +1,13 @@
-body{
+body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-footer{
+
+footer {
     margin-top: auto;
+}
+
+input[readonly] {
+    color: rgba(166, 173, 186, .75);
 }
