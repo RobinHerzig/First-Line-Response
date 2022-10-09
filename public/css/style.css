@@ -8,6 +8,16 @@ footer {
     margin-top: auto;
 }
 
-input[readonly] {
-    color: rgba(166, 173, 186, .75);
+.CAD input::placeholder {
+    color: rgba(166, 173, 186, .5);
+}
+
+.CAD input[readonly] {
+    cursor: default;
+    pointer-events: none;
+}
+
+.responseDepartment input {
+    max-width: 8rem;
+    text-align: center;
 }

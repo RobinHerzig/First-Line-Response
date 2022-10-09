@@ -72,10 +72,10 @@ const highlightSelectedCall = async function (info) {
     try {
         for (let i = 0; i < info.length; i++) {
             if (info[i]._id == idSessionStorage) {
-                activeCallArray[i].style.background = 'grey'
+                activeCallArray[i].classList.add("bg-gray-600")
             }
             else {
-                activeCallArray[i].style.background = 'transparent'
+                activeCallArray[i].classList.remove("bg-gray-600")
             }
         }
     }
