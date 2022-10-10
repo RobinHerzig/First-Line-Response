@@ -1,10 +1,10 @@
-<!-- <link rel="stylesheet" href="css/style.css"> -->
 <script defer type="text/javascript" src="js/main.js"></script>
 
 <section class="CAD text-center bg-gray-800 m-6 mx-auto p-6 border-2 border-base-200 border-solid rounded-md">
     <nav class="flex flex-row flex-auto border-b border-gray-700 border-solid">
         <form action="/demo/createCall" method="POST" class="flex-none pb-1">
-            <button type="submit" id="newCall" class="bg-red-800 text-red-200 hover:bg-red-700 p-2 min-h-65 aspect-square">New Call</button>
+            <button type="submit" id="newCall"
+                class="bg-red-800 text-red-200 hover:bg-red-700 p-2 min-h-65 aspect-square">New Call</button>
         </form>
 
         <section class="callList flex-1 pb-1 ml-3">
@@ -12,7 +12,8 @@
                 <% // Populate call list %>
                     <% for (let i=0; i < info.length; i++) { %>
                         <li>
-                            <button value="<%= info[i]._id %>" class="activeCall min-w-full text-left hover:bg-gray-600">
+                            <button value="<%= info[i]._id %>"
+                                class="activeCall min-w-full text-left hover:bg-gray-600">
                                 <span>
                                     <%= info[i].time %>
                                 </span>
@@ -33,9 +34,6 @@
                         <% } %>
             </ul>
         </section>
-        <!-- <section class="flex-none pb-1">
-            <span>First Line Response</span>
-        </section> -->
     </nav>
 
     <main class="selectedCall flex flex-col">
@@ -44,13 +42,14 @@
                 <fieldset>
                     <legend class="p-1">Call Information</legend>
                     <label for="date" class="pl-2">Date:</label>
-                    <input type="text" placeholder="Date" name="date" class="callInfoData bg-gray-700 ml-1 pl-1" id="date"
-                        readonly>
+                    <input type="text" placeholder="Date" name="date" class="callInfoData bg-gray-700 ml-1 pl-1 w-28"
+                        id="date" readonly>
                     <label for="time" class="pl-2">Time:</label>
-                    <input type="text" placeholder="Time" name="time" class="callInfoData bg-gray-700 ml-1 pl-1" id="time"
-                        readonly>
+                    <input type="text" placeholder="Time" name="time" class="callInfoData bg-gray-700 ml-1 pl-1 w-28"
+                        id="time" readonly>
                     <label for="id" class="pl-2">ID:</label>
-                    <input type="text" placeholder="ID" name="id" class="callInfoData bg-gray-700 ml-1 pl-1" id="id" readonly>
+                    <input type="text" placeholder="ID" name="id" class="callInfoData bg-gray-700 ml-1 pl-1 w-56"
+                        id="id" readonly>
                 </fieldset>
             </section>
             <section class="callLocation pb-1 border-b border-gray-700 border-solid">
@@ -63,14 +62,16 @@
                     <input type="text" placeholder="Address" name="address" class="callInfoData bg-gray-700 ml-1 pl-1"
                         id="address">
                     <label for="city" class="pl-2">City:</label>
-                    <input type="text" placeholder="City" name="city" class="callInfoData bg-gray-700 ml-1 pl-1" id="city">
+                    <input type="text" placeholder="City" name="city" class="callInfoData bg-gray-700 ml-1 pl-1"
+                        id="city">
                 </fieldset>
             </section>
             <section class="callType pb-1 border-b border-gray-700 border-solid">
                 <fieldset>
                     <legend class="p-1">Call Type</legend>
                     <label for="type" class="pl-2">Type:</label>
-                    <input type="text" placeholder="Type" name="type" class="callInfoData bg-gray-700 ml-1 pl-1" id="type">
+                    <input type="text" placeholder="Type" name="type" class="callInfoData bg-gray-700 ml-1 pl-1"
+                        id="type">
                 </fieldset>
             </section>
             <section class="callNotes pb-1 border-b border-gray-700 border-solid">
@@ -78,28 +79,29 @@
                     <legend class="p-1">Call Notes</legend>
                     <ol name="notes" class="callInfoData bg-gray-700 overflow-y-scroll text-left h-48 mb-px p-1"
                         id="callNotes"></ol>
-                    <input type="text" placeholder="Notes" name="newNote" class="callInfoData bg-gray-700 min-w-full pl-1"
-                        id="newNote">
+                    <input type="text" placeholder="Notes" name="newNote"
+                        class="callInfoData bg-gray-700 min-w-full pl-1" id="newNote">
                 </fieldset>
             </section>
             <section class="callerInfo pb-1 border-b border-gray-700 border-solid">
                 <fieldset>
                     <legend class="p-1">Caller Information</legend>
                     <label for="first" class="pl-2">First Name:</label>
-                    <input type="text" placeholder="First Name" name="first" class="callInfoData bg-gray-700 ml-1 pl-1"
-                        id="first">
+                    <input type="text" placeholder="First Name" name="first"
+                        class="callInfoData bg-gray-700 ml-1 pl-1 w-32" id="first">
                     <label for="last" class="pl-2">Last Name:</label>
-                    <input type="text" placeholder="Last Name" name="last" class="callInfoData bg-gray-700 ml-1 pl-1" id="last">
+                    <input type="text" placeholder="Last Name" name="last"
+                        class="callInfoData bg-gray-700 ml-1 pl-1 w-32" id="last">
                     <label for="phone" class="pl-2">Phone Number:</label>
-                    <input type="text" placeholder="Phone Number" name="phone" class="callInfoData bg-gray-700 ml-1 pl-1"
-                        id="phone">
+                    <input type="text" placeholder="Phone Number" name="phone"
+                        class="callInfoData bg-gray-700 ml-1 pl-1 w-32" id="phone">
                 </fieldset>
             </section>
             <section class="responseDepartment pb-1 border-b border-gray-700 border-solid">
                 <fieldset class="mx-auto inline-block">
                     <legend class="p-1">Department Response</legend>
                     <table id="departmentResponseTable">
-                        <tr>
+                        <tr class="flex place-content-around">
                             <th>Apparatus</th>
                             <th>Tone</th>
                             <th>En Route</th>
@@ -107,27 +109,35 @@
                             <th>Departure</th>
                             <th>Quarters</th>
                         </tr>
-                        <tr class="apparatusRow border-b border-gray-800 border-solid">
+                        <tr class="apparatusRow border-b border-gray-800 border-solid flex">
                             <td><input type="text" placeholder="Apparatus" name="apparatus1"
-                                    class="callInfoData response bg-gray-700 pl-1 " id="apparatus1"></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="apparatus1">
+                            </td>
                             <td><input type="text" placeholder="Tone" name="tone1"
-                                    class="callInfoData response bg-gray-700 pl-1" id="tone1" readonly></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="tone1"
+                                    readonly></td>
                             <td><input type="text" placeholder="En Route" name="enroute1"
-                                    class="callInfoData response bg-gray-700 pl-1" id="enroute1" readonly></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="enroute1"
+                                    readonly></td>
                             <td><input type="text" placeholder="Arrival" name="arrival1"
-                                    class="callInfoData response bg-gray-700 pl-1" id="arrival1" readonly></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="arrival1"
+                                    readonly></td>
                             <td><input type="text" placeholder="Departure" name="departure1"
-                                    class="callInfoData response bg-gray-700 pl-1" id="departure1" readonly></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="departure1"
+                                    readonly></td>
                             <td><input type="text" placeholder="Quarters" name="quarters1"
-                                    class="callInfoData response bg-gray-700 pl-1" id="quarters1" readonly></td>
+                                    class="callInfoData response bg-gray-700 pl-1 w-full max-w-[120px]" id="quarters1"
+                                    readonly></td>
                         </tr>
                     </table>
                 </fieldset>
             </section>
             <section>
                 <fieldset class="p-1">
-                    <button id="saveCallButton" class="bg-green-800 text-green-200 hover:bg-green-700 p-2">Save Call</button>
-                    <button id="deleteCallButton" formaction="/demo/deleteSelectedCall/?_method=DELETE" class="bg-red-800 text-red-200 hover:bg-red-700 p-2">Delete
+                    <button id="saveCallButton" class="bg-green-800 text-green-200 hover:bg-green-700 p-2">Save
+                        Call</button>
+                    <button id="deleteCallButton" formaction="/demo/deleteSelectedCall/?_method=DELETE"
+                        class="bg-red-800 text-red-200 hover:bg-red-700 p-2">Delete
                         Call</button>
                 </fieldset>
             </section>

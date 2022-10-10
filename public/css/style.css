@@ -17,7 +17,25 @@ footer {
     pointer-events: none;
 }
 
-.responseDepartment input {
-    max-width: 8rem;
-    text-align: center;
+@media only screen and (max-width: 900px) {
+
+    .callInfo fieldset,
+    .callLocation fieldset,
+    .callType fieldset,
+    .callerInfo fieldset {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+    }
+
+    .callInfo fieldset input,
+    .callLocation fieldset input,
+    .callType fieldset input,
+    .callerInfo fieldset input {
+        width: 215px;
+    }
+
+    .responseDepartment th {
+        display: none;
+    }
 }
