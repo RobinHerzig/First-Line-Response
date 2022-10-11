@@ -26,8 +26,8 @@ module.exports = {
     getAdvertisement: (req, res) => {
         res.render('advertisement.ejs')
     },
-    getJobs: (req, res) => {
-        res.render('jobs.ejs')
+    getContribute: (req, res) => {
+        res.render('contribute.ejs')
     },
     getPress: (req, res) => {
         res.render('press.ejs')
