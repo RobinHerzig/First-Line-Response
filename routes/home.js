@@ -20,7 +20,6 @@ router.get('/terms', homeController.getTerms)
 router.get('/privacy', homeController.getPrivacy)
 router.get('/cookies', homeController.getCookies)
 
-
 router.get('/login', authController.getLogin)
 router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
