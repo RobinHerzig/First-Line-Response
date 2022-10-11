@@ -10,6 +10,10 @@ const ResponseSchema = new mongoose.Schema({
 });
 
 const Calls = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   date: {
     type: String,
   },

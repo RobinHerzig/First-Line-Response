@@ -3,9 +3,8 @@ const { Call, ResponseSchema } = require('../models/Call')
 module.exports = {
     getDemo: async (req, res) => {
         try {
-            const data = await Call.find({}).lean()
+            const data = await Call.find({ user: req.user }).lean()
             console.log('Getting demo')
-            console.log(req.user)
             res.render('demo.ejs', { info: data,  user: req.user })
         } catch (err) {
             console.log(err)
@@ -19,9 +18,11 @@ module.exports = {
     createCall: async (req, res) => {
         try {
             await Call.create({
+                user: req.user,
                 date: new Date().toLocaleDateString(),
                 time: new Date().toLocaleTimeString('en-US', { hour12: false }),
             })
+            console.log(req.user)
             console.log('A call has been created')
             res.redirect('/demo')
         } catch (err) {
