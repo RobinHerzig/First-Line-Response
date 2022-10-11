@@ -21,6 +21,10 @@ footer {
     pointer-events: none;
 }
 
+.bg-gray {
+    background: rgb(75 85 99);
+}
+
 @media only screen and (max-width: 900px) {
 
     .callInfo fieldset,

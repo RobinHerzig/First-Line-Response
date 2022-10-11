@@ -3,10 +3,9 @@ const router = express.Router()
 const demoController = require('../controllers/demo') 
 const { ensureAuth } = require('../middleware/auth')
 
-
-router.get('/', demoController.getDemo)
+router.get('/', ensureAuth, demoController.getDemo)
 router.post('/createCall', demoController.createCall)
-router.get('/displaySelectedCall', demoController.displaySelectedCall) // Delete?
+router.get('/displaySelectedCall', demoController.displaySelectedCall)
 router.put('/saveSelectedCall', demoController.saveSelectedCall)
 router.delete('/deleteSelectedCall', demoController.deleteSelectedCall)
 

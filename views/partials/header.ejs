@@ -16,7 +16,7 @@
 <body>
     <div class="navbar bg-gray-800">
         <div class="flex-1">
-            <a href="/"><img src="#" alt="First Line Response logo"></a>
+            <a href="/">First Line Response</a>
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal p-0">
@@ -25,7 +25,15 @@
                 <li><a href="/faq">FAQ</a></li>
                 <li><a href="/demo">Demo</a></li>
                 <li><a href="/support">Support</a></li>
-                <li><a href="/login">Login</a></li>
+                <% if (!user?.id) { %>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Signup</a></li>
+                <% } %>
+                <% if (user?.id) { %>
+                    <li><a href="/logout">Logout</a></li>
+                <% } %>
+
             </ul>
         </div>
     </div>
+

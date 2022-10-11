@@ -3,18 +3,19 @@ const { Call, ResponseSchema } = require('../models/Call')
 module.exports = {
     getDemo: async (req, res) => {
         try {
-            const data = await Call.find({})
+            const data = await Call.find({}).lean()
             console.log('Getting demo')
-            res.render('demo.ejs', { info: data })
+            console.log(req.user)
+            res.render('demo.ejs', { info: data,  user: req.user })
         } catch (err) {
             console.log(err)
             res.status(404).json('404 error: getDemo')
         }
     },
-    // notLoggedIn: (req, res) => {
-    //     console.log('Please login to access profiles page. Redirecting...')
-    //     res.redirect('/')
-    // },
+    notLoggedIn: (req, res) => {
+        console.log('Please login to access profiles page. Redirecting...')
+        res.redirect('/login')
+    },
     createCall: async (req, res) => {
         try {
             await Call.create({
@@ -30,7 +31,7 @@ module.exports = {
     },
     displaySelectedCall: async (req, res) => {
         try {
-            const data = await Call.find({})
+            const data = await Call.find({}).lean()
             console.log('Displaying selected call')
             res.json(data)
         } catch (err) {

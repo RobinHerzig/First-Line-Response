@@ -72,10 +72,10 @@ const highlightSelectedCall = async function (info) {
     try {
         for (let i = 0; i < info.length; i++) {
             if (info[i]._id == idSessionStorage) {
-                activeCallArray[i].classList.add("bg-gray-600")
+                activeCallArray[i].classList.add("bg-gray")
             }
             else {
-                activeCallArray[i].classList.remove("bg-gray-600")
+                activeCallArray[i].classList.remove("bg-gray")
             }
         }
     }
@@ -111,11 +111,6 @@ const addApparatusRow = async function (info) {
     while (info.response[apparatusCount]?.apparatus) { // Calculate how many rows will be needed by counting non-empty aparatus values
         apparatusCount += 1
     }
-
-
-    // while (info['apparatus' + (apparatusCount + 1)]) { // Calculate how many rows will be needed by counting non-empty aparatus values
-    //     apparatusCount += 1
-    // }
 
     try {
         if (apparatusRowArray.length === apparatusCount + 1) return // If there are already the correct number of rows, return without making changes
