@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "first-line-response",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "Computer-aided dispatch",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
