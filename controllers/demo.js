@@ -32,7 +32,7 @@ module.exports = {
     },
     displaySelectedCall: async (req, res) => {
         try {
-            const data = await Call.find({}).lean()
+            const data = await Call.find({ user: req.user }).lean()
             console.log('Displaying selected call')
             res.json(data)
         } catch (err) {
