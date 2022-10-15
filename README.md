@@ -1,4 +1,4 @@
-# Computer Aided Dispatch
+# First Line Response
 
 <p align="center">
     <img src="https://img.shields.io/static/v1?label=|&message=HTML5&color=a33550&style=plastic&logo=html5"/>
@@ -26,9 +26,9 @@
 <!--     <img src="https://img.shields.io/static/v1?label=|&message=FIREBASE&color=cbb148&style=plastic&logo=firebase"/> -->
 </p>
 
-https://computer-aided-dispatch.herokuapp.com/
+<!-- https://computer-aided-dispatch.herokuapp.com/ -->
 
-In emergency services, Computer-aided dispatch (CAD) software is used to track calls for service and first responders.
+In emergency services, computer-aided dispatch (CAD) software is used to track calls for service and first responders.
 
 It's utilized by 911 operators who answer incoming calls, prioritize urgency, and dispatch law enforcement, fire, or EMS personel as required.
 
@@ -38,15 +38,17 @@ CAD systems are critical for the saftey and wellbeing of both first responders a
 
 This is a full-stack project utilizing web API's sessionStorage, EJS and MongoDB.
 
-The "New Call" button sends a POST request that adds a new document to the collection in MongoDB, which loads in the call list using EJS. When selected, client-side JavaScript uses references its ObjectId to iterate through the collection and populate the form. In addition, the web API sessionStorage saves the ObjectID so that it will automatically reload if the browser is refreshed.
+The "New Call" button sends a POST request that adds a new document to the collection in MongoDB, which loads in the call list using EJS. When selected, client-side JavaScript references its ObjectId to iterate through the collection and populate the form. In addition, the web API sessionStorage saves the ObjectID so that it will automatically reload if the browser is refreshed.
 
-The document my be modified while it's loaded in the form. To save it, the "Save Call" button uses an event listener to parse each of the fields and sends the data to the server as a POST request. The server forwards the update request to MongoDB, which saves the data.
+The document may be modified while it's loaded in the form. To save it, the "Save Call" button uses method-override module to parse each of field and send the data to the server as a POST request inside MongoDB.
 
 ## Optimizations:
 
 While department budgets towards CAD software varies, upscale variants offer a wide array of options. These include creating unit roles and groups, AVL tracking with map, automatic creation of incident reports and archives, and so much more. Given time, I may look into expanding this project to add some of these features.
 
 In addition, one goal is to convert this into a desktop app using <a href="https://www.electronjs.org/">Electron</a>, a framework that allows developers to create native applications using web technologies.
+
+Introducing a frontend framework, such as React, would also improve the interactivity of this application. In particular, it would allow for seamless updating of components without requiring a browser refresh.
 
 ## Lessons Learned:
 
