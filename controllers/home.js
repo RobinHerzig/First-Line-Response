@@ -2,15 +2,6 @@ module.exports = {
     getIndex: (req, res) => {
         res.render('home.ejs', { user: req.user })
     },
-    getAbout: (req, res) => {
-        res.render('about.ejs', { user: req.user })
-    },
-    getFeatures: (req, res) => {
-        res.render('features.ejs', { user: req.user })
-    },
-    getFAQ: (req, res) => {
-        res.render('faq.ejs', { user: req.user })
-    },
     getSupport: (req, res) => {
         res.render('support.ejs', { user: req.user })
     },
