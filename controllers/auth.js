@@ -1,7 +1,6 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const { Call, ResponseSchema } = require('../models/Call')
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -94,8 +93,6 @@ exports.postSignup = (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
   });
-
-  const call = new Call
 
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
