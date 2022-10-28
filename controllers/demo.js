@@ -22,7 +22,6 @@ module.exports = {
                 date: new Date().toLocaleDateString(),
                 time: new Date().toLocaleTimeString('en-US', { hour12: false }),
             })
-            console.log(req.user)
             console.log('A call has been created')
             res.redirect('/demo')
         } catch (err) {
@@ -43,7 +42,7 @@ module.exports = {
     saveSelectedCall: async (req, res) => {
         try {
 
-            let callUpdate = await Call.findById(req.body.id)
+            let callUpdate = await Call.findById(req.body.id).lean()
 
             callUpdate.business = req.body.business
             callUpdate.address = req.body.address
