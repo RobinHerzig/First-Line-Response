@@ -42,7 +42,7 @@ module.exports = {
     saveSelectedCall: async (req, res) => {
         try {
 
-            let callUpdate = await Call.findById(req.body.id).lean()
+            let callUpdate = await Call.findById(req.body.id)
 
             callUpdate.business = req.body.business
             callUpdate.address = req.body.address
