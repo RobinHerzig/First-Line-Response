@@ -24,12 +24,10 @@ async function displaySelectedCall() {
                 const callInfoData = document.querySelectorAll('.callInfoData')
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === 'date') {
-                        const utcDate = new Date(info[i].date)
-                        elem.value = utcDate.toLocaleDateString()
+                        elem.value = localizeDate(info[i].date)
                     }
                     else if (elem.id === 'time') {
-                        const utcDate = new Date(info[i].date)
-                        elem.value = utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
+                        elem.value = localizeTime(info[i].date)
                     }
                     else if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually
@@ -147,6 +145,21 @@ const addApparatusRow = async function (info) {
     }
 }
 
+// Localize date and time (client-side, for accuracy)
+
+function localizeDate(date) {
+    const utcDate = new Date(date)
+    return utcDate.toLocaleDateString()
+}
+
+const callListTimes = document.querySelectorAll('.callListTimes')
+Array.from(callListTimes).forEach(elem => elem.textContent = localizeTime(elem.textContent))
+
+function localizeTime(date) {
+    const utcDate = new Date(date)
+    return utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
+}
+
 // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
 
 function removeReadOnlyAttribute() {
@@ -217,3 +230,6 @@ function removeSessionStorage() {
         sessionStorage.removeItem('id') // Sets new id to sessionStorage, so the new call will be active on reload
     }
 }
+
+// Localize calllist times (does not work using EJS, must be local)
+

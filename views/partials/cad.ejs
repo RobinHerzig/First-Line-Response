@@ -14,8 +14,8 @@
                         <li>
                             <button value="<%= info[i]._id %>"
                                 class="activeCall min-w-full text-left hover:bg-gray-600">
-                                <span>
-                                    <%= new Date(info[i].date).toLocaleTimeString('en-US', { hourCycle: 'h23' }) %>
+                                <span class="callListTimes">
+                                    <%= info[i].date %>
                                 </span>
                                 <span>
                                     <%= info[i].business %>
