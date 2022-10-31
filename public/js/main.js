@@ -161,7 +161,6 @@ const localizeTime = function (date) {
 }
 
 const localizeTimeCallList = function (info) {
-    console.log(info)
     const callListTimes = document.querySelectorAll('.callListTimes')
     Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date))
 }
