@@ -40,6 +40,12 @@ async function displaySelectedCall() {
                         Array.from(callNotes.childNodes).forEach(elem => elem.remove()) // Delete call notes from previous displayed call
                         if (info[i].callNotes) {
                             callNotesArray = Object.values(info[i].callNotes)
+                            callNotesArray = callNotesArray.map(elem => {  // Localize call notes timestamp (client-side, for accuracy)
+                                let array = elem.split(': ')
+                                let timestamp = array[0]
+                                array[0] = localizeTime(timestamp)
+                                return array.join(': ')
+                            })
                             for (let i = 0; i < callNotesArray.length; i++) {
                                 let li = document.createElement('li')
                                 const node = document.createTextNode(callNotesArray[i]) // Parse through callNotesObject to create and display a list of call notes

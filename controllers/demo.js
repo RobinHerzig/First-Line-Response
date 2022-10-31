@@ -52,7 +52,7 @@ module.exports = {
             callUpdate.phone = req.body.phone
 
             if (req.body.newNote) {
-                callUpdate.callNotes.push(`${new Date().toLocaleTimeString('en-US', { hour12: false })}: ${req.body.newNote}`)
+                callUpdate.callNotes.push(`${new Date()}: ${req.body.newNote}`)
             }
 
             let responseCount = (Object.keys(req.body).filter(elem => elem.match(/apparatus(\d+)/)).length)
