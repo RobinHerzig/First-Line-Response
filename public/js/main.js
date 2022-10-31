@@ -25,6 +25,8 @@ async function displaySelectedCall() {
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually
+                        removeReadOnlyAttribute() // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
+                        removeDisabledAttribute() // Remove disabled attribute from save button when call is displayed
                     }
                     else if (elem.id === 'callNotes') {
                         const callNotes = document.querySelector('#callNotes')
@@ -135,6 +137,22 @@ const addApparatusRow = async function (info) {
     catch (err) {
         console.log(err)
     }
+}
+
+// Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
+
+function removeReadOnlyAttribute() {
+    const callInfoDataEdit = Array.from(document.querySelectorAll('.callInfoDataEdit'))
+    callInfoDataEdit.forEach(elem => elem.removeAttribute('readonly'))
+}
+
+// Remove disabled attribute from save button when call is displayed
+
+function removeDisabledAttribute() {
+    const saveCallButton = document.querySelector('#saveCallButton')
+    const deleteCallButton = document.querySelector('#deleteCallButton')
+    saveCallButton.removeAttribute('disabled')
+    deleteCallButton.removeAttribute('disabled')
 }
 
 // Input time in apparatus cells
