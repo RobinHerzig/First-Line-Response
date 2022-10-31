@@ -18,16 +18,17 @@ async function displaySelectedCall() {
         })
         const info = await res.json()
         highlightSelectedCall(info) // Highlight selected call in call list
+        localizeTimeCallList(info) // Localize call list time (client-side, for accuracy)
         for (let i = 0; i < info.length; i++) {
             if (info[i]._id == idSessionStorage) {
-                addApparatusRow(info[i]) // Add additional apparatus rows, if necessary 
+                addApparatusRow(info[i]) // Add additional apparatus rows, if necessary
                 const callInfoData = document.querySelectorAll('.callInfoData')
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === 'date') {
-                        elem.value = localizeDate(info[i].date)
+                        elem.value = localizeDate(info[i].date) // Localize call info date (client-side, for accuracy)
                     }
                     else if (elem.id === 'time') {
-                        elem.value = localizeTime(info[i].date)
+                        elem.value = localizeTime(info[i].date) // Localize call info time (client-side, for accuracy)
                     }
                     else if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually
@@ -73,23 +74,19 @@ async function displaySelectedCall() {
 
 // Highlight selected call in call list
 
-const highlightSelectedCall = async function (info) {
+const highlightSelectedCall = function (info) {
     const idSessionStorage = sessionStorage.getItem('id')
     const activeCallArray = Array.from(activeCalls)
 
-    try {
-        for (let i = 0; i < info.length; i++) {
-            if (info[i]._id == idSessionStorage) {
-                activeCallArray[i].classList.add("bg-gray")
-            }
-            else {
-                activeCallArray[i].classList.remove("bg-gray")
-            }
+    for (let i = 0; i < info.length; i++) {
+        if (info[i]._id == idSessionStorage) {
+            activeCallArray[i].classList.add("bg-gray")
+        }
+        else {
+            activeCallArray[i].classList.remove("bg-gray")
         }
     }
-    catch (err) {
-        console.log(err)
-    }
+
 }
 
 // Add additional apparatus rows, if necessary
@@ -147,29 +144,32 @@ const addApparatusRow = async function (info) {
 
 // Localize date and time (client-side, for accuracy)
 
-function localizeDate(date) {
+const localizeDate = function (date) {
     const utcDate = new Date(date)
     return utcDate.toLocaleDateString()
 }
 
-const callListTimes = document.querySelectorAll('.callListTimes')
-Array.from(callListTimes).forEach(elem => elem.textContent = localizeTime(elem.textContent))
-
-function localizeTime(date) {
+const localizeTime = function (date) {
     const utcDate = new Date(date)
     return utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
 }
 
+const localizeTimeCallList = function (info) {
+    console.log(info)
+    const callListTimes = document.querySelectorAll('.callListTimes')
+    Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date))
+}
+
 // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
 
-function removeReadOnlyAttribute() {
+const removeReadOnlyAttribute = function () {
     const callInfoDataEdit = Array.from(document.querySelectorAll('.callInfoDataEdit'))
     callInfoDataEdit.forEach(elem => elem.removeAttribute('readonly'))
 }
 
 // Remove disabled attribute from save button when call is displayed
 
-function removeDisabledAttribute() {
+const removeDisabledAttribute = function () {
     const saveCallButton = document.querySelector('#saveCallButton')
     const deleteCallButton = document.querySelector('#deleteCallButton')
     saveCallButton.removeAttribute('disabled')
