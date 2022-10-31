@@ -24,16 +24,12 @@ async function displaySelectedCall() {
                 const callInfoData = document.querySelectorAll('.callInfoData')
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === 'date') {
-                        const utcDate = info[i].date;
-                        const date = new Date(utcDate);
-                        const localDate = date.toLocaleString()
-                        elem.value = localDate.split(', ')[0]
+                        const utcDate = new Date(info[i].date)
+                        elem.value = utcDate.toLocaleDateString()
                     }
                     else if (elem.id === 'time') {
-                        const utcDate = info[i].date;
-                        const date = new Date(utcDate);
-                        const localDate = date.toLocaleString()
-                        elem.value = localDate.split(', ')[1]
+                        const utcDate = new Date(info[i].date)
+                        elem.value = utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
                     }
                     else if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually

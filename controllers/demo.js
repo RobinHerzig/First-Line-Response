@@ -19,8 +19,7 @@ module.exports = {
         try {
             await Call.create({
                 user: req.user,
-                date: new Date(),
-                // time: new Date().toLocaleTimeString('en-US', { hour12: false }),
+                date: new Date()
             })
             console.log('A call has been created')
             res.redirect('/demo')
