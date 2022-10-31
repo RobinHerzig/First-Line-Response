@@ -197,7 +197,7 @@ const trackApparatusTimes = function () {
     }
     const timeStamp = function (cell) {
         if (!cell.hasAttribute('readonly'))
-            cell.value = new Date().toLocaleTimeString('en-US', { hour12: false })
+            cell.value = new Date().toLocaleTimeString('en-US', { hourCycle: 'h23' })
         cell.setAttribute('readonly', '') // Disable cell after add timestamp
     }
 
