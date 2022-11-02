@@ -26,11 +26,11 @@
 <!--     <img src="https://img.shields.io/static/v1?label=|&message=FIREBASE&color=cbb148&style=plastic&logo=firebase"/> -->
 </p>
 
-https://firstlineresponse.cyclic.app/
+firstlineresponse.onrender.com/
 
 In emergency services, computer-aided dispatch (CAD) software is used to track calls for service and first responders.
 
-It's utilized by 911 operators who answer incoming calls, prioritize urgency, and dispatch law enforcement, fire, or EMS personel as required.
+It's utilized by 911 operators who answer incoming calls, prioritize urgency, and dispatch law enforcement, fire, or EMS personnel as required.
 
 CAD systems are critical for the saftey and wellbeing of both first responders and the citizens they serve.
 
