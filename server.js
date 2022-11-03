@@ -22,7 +22,7 @@ connectDB()
 app.set('view engine', 'ejs')
 
 // Static folder
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
 // Body parsing
 app.use(express.urlencoded({ extended: true }))
