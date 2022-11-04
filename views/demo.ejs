@@ -1,15 +1,19 @@
 <%- include('partials/header.ejs') %>
 
-<% if (!user?.id) { %>
-  <div class="alert alert-info shadow-lg">
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span>Warning: This document is read-only. To create and save calls, please <a href="/login"
-        class="link link-hover underline">login</a>. Sample calls have been provided.</span>
+  <% if (!user?.id) { %>
+    <div class="alert alert-info shadow-lg">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          class="stroke-current flex-shrink-0 w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>This document is read-only. To create and save calls, please <a href="/login"
+            class="link link-hover underline">login</a>. Sample calls have been provided.</span>
+      </div>
     </div>
-  </div>
-<% } %>
+    <% } %>
 
-<%- include('partials/cad.ejs') %>
+      <%- include('partials/cad.ejs') %>
 
-<%- include('partials/footer.ejs') %>
+        <%- include('partials/footer.ejs') %>
