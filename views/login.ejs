@@ -1,26 +1,27 @@
 <%- include('partials/header.ejs') %>
 
-    <section class="m-6 mx-auto bg-gray-800 p-6 rounded-md">
-        <h1 class="pb-3">Login below. If you haven't created an account, please <a href="/signup" class="link link-hover underline">signup</a>.</h1>
-        <form action="/login" method="POST">
-            <input type="email" name="email" placeholder="Email" class="bg-gray-700">
-            <input type="password" name="password" placeholder="Password" class="bg-gray-700">
-            <button type="submit" class="link link-hover">Submit</button>
-        </form>
-        <% if (locals.messages.errors) { %>
-            <% messages.errors.forEach( el=> { %>
-                <div class="bg-gray-800 pt-3">
-                    <%= el.msg %>
-                </div>
-                <% }) %>
-                    <% } %>
-                        <% if (locals.messages.info) { %>
-                            <% messages.info.forEach( el=> { %>
-                                <div class="bg-gray-800 pt-3">
-                                    <%= el.msg %>
-                                </div>
-                                <% }) %>
-                                    <% } %>
-    </section>
+<section class="m-6 mx-auto bg-gray-800 p-6 rounded-md">
+    <p class="pb-3">Login below. If you haven't created an account, please <a href="/signup"
+            class="link link-hover underline">signup</a>.</p>
+    <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Email" class="bg-gray-700">
+        <input type="password" name="password" placeholder="Password" class="bg-gray-700">
+        <button type="submit" class="link link-hover">Submit</button>
+    </form>
+    <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el=> { %>
+            <div class="bg-gray-800 pt-3">
+                <%= el.msg %>
+            </div>
+            <% }) %>
+                <% } %>
+                    <% if (locals.messages.info) { %>
+                        <% messages.info.forEach( el=> { %>
+                            <div class="bg-gray-800 pt-3">
+                                <%= el.msg %>
+                            </div>
+                            <% }) %>
+                                <% } %>
+</section>
 
-    <%- include('partials/footer.ejs') %>
+<%- include('partials/footer.ejs') %>

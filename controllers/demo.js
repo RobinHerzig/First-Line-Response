@@ -1,11 +1,18 @@
 const { Call, ResponseSchema } = require('../models/Call')
+const { commercialFireAlarm, MedicalEmergency } = require('../apis/exampleCalls.js')
 
 module.exports = {
     getDemo: async (req, res) => {
         try {
-            const data = await Call.find({ user: req.user }).lean()
+            let data = {}
+            if (req.user != undefined) {
+                data = await Call.find({ user: req.user }).lean()
+            }
+            else {
+                data = [{ ...commercialFireAlarm }, { ...MedicalEmergency }]
+            }
             console.log('Getting demo')
-            res.render('demo.ejs', { info: data,  user: req.user })
+            res.render('demo.ejs', { info: data, user: req.user })
         } catch (err) {
             console.log(err)
             res.status(404).json('404 error: getDemo')
@@ -30,7 +37,14 @@ module.exports = {
     },
     displaySelectedCall: async (req, res) => {
         try {
-            const data = await Call.find({ user: req.user }).lean()
+            let data = {}
+            if (req.user != undefined) {
+                data = await Call.find({ user: req.user }).lean()
+            }
+            else {
+                data = [{ ...commercialFireAlarm }, { ...MedicalEmergency }]
+            }
+            console.log(data)
             console.log('Displaying selected call')
             res.json(data)
         } catch (err) {

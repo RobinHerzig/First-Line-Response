@@ -17,6 +17,7 @@ async function displaySelectedCall() {
             method: 'get',
         })
         const info = await res.json()
+        console.log(info)
         highlightSelectedCall(info) // Highlight selected call in call list
         localizeTimeCallList(info) // Localize call list time (client-side, for accuracy)
         for (let i = 0; i < info.length; i++) {
