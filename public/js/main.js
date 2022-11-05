@@ -1,28 +1,25 @@
 // Display selected call after page load
-
 window.addEventListener('load', displaySelectedCall)
 
 // Display selected call from active call list
-
 const activeCalls = document.querySelectorAll('.activeCall')
 Array.from(activeCalls).forEach(elem => elem.addEventListener('click', displaySelectedCall))
 
 async function displaySelectedCall() {
     const id = this.value
     if (id) sessionStorage.setItem('id', id) // Set this id to sessionStorage, so the selected call can be displayed on page load
-    else if (sessionStorage.getItem('id') === null) sessionStorage.setItem('id', Array.from(activeCalls)[activeCalls.length - 1].value) // If no active call id exists in storage, automatically set id of the newest call. Necessary for newly added call to automatically show active or prevent blank form when deleting call
+    else if (sessionStorage.getItem('id') === null) sessionStorage.setItem('id', Array.from(activeCalls)[activeCalls.length - 1]?.value) // If no active call id exists in storage, automatically set id of the newest call. Necessary for newly added call to automatically show active or prevent blank form when deleting call
     const idSessionStorage = sessionStorage.getItem('id')
     try {
         const res = await fetch('/demo/displaySelectedCall', {
             method: 'get',
         })
         const info = await res.json()
-        console.log(info)
-        highlightSelectedCall(info) // Highlight selected call in call list
-        localizeTimeCallList(info) // Localize call list time (client-side, for accuracy)
         for (let i = 0; i < info.length; i++) {
             if (info[i]._id == idSessionStorage) {
                 addApparatusRow(info[i]) // Add additional apparatus rows, if necessary
+                removeReadOnlyAttribute() // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
+                removeDisabledAttribute() // Remove disabled attribute from save button when call is displayed
                 const callInfoData = document.querySelectorAll('.callInfoData')
                 Array.from(callInfoData).forEach(elem => { // Iterate through the form to add values from the database return
                     if (elem.id === 'date') {
@@ -33,27 +30,9 @@ async function displaySelectedCall() {
                     }
                     else if (elem.id === "id") {
                         elem.value = info[i]._id // The database's "_id" does not match elem's "id", so the id value is specified manually
-                        removeReadOnlyAttribute() // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
-                        removeDisabledAttribute() // Remove disabled attribute from save button when call is displayed
                     }
                     else if (elem.id === 'callNotes') {
-                        const callNotes = document.querySelector('#callNotes')
-                        Array.from(callNotes.childNodes).forEach(elem => elem.remove()) // Delete call notes from previous displayed call
-                        if (info[i].callNotes) {
-                            callNotesArray = Object.values(info[i].callNotes)
-                            callNotesArray = callNotesArray.map(elem => {  // Localize call notes timestamp (client-side, for accuracy)
-                                let array = elem.split(': ')
-                                let timestamp = array[0]
-                                array[0] = localizeTime(timestamp)
-                                return array.join(': ')
-                            })
-                            for (let i = 0; i < callNotesArray.length; i++) {
-                                let li = document.createElement('li')
-                                const node = document.createTextNode(callNotesArray[i]) // Parse through callNotesObject to create and display a list of call notes
-                                li.appendChild(node)
-                                callNotes.appendChild(li)
-                            }
-                        }
+                        appendCallNotes(info[i]) // Create and append each line of callnotes to the DOM
                     }
                     else if (elem.className.includes('response')) {
                         let idNumber = elem.id.split('').filter(elem => (Number(elem) >= 0 || Number(elem) <= 9)).join('') // Split element ID name and number to use for parsing database return
@@ -63,15 +42,14 @@ async function displaySelectedCall() {
                     else if (info[i].hasOwnProperty(elem.id)) {
                         elem.value = info[i][elem.id] // If the database has a key that matches an element id, the value of the key is used as the value of the element
                     }
-                    else if (Array.isArray(info[i])) {
-                        elem.value = info[i][elem.id] // If the database has a key that matches an element id, the value of the key is used as the value of the element
-                    }
                     else {
-                        elem.value = '' // If the database does not have a key that matches an element id, an empty string is used as the value of the element
+                        elem.value = '' // Fallback. If the database does not have a key that matches an element id, an empty string is used as the value of the element
                     }
                 })
             }
         }
+        highlightSelectedCall(info) // Highlight selected call in call list
+        localizeTimeCallList(info) // Localize call list time (client-side, for accuracy)
         trackApparatusTimes() // Add event listeners to each cell to create timestamp buttons    
     }
     catch (err) {
@@ -79,26 +57,8 @@ async function displaySelectedCall() {
     }
 }
 
-// Highlight selected call in call list
-
-const highlightSelectedCall = function (info) {
-    const idSessionStorage = sessionStorage.getItem('id')
-    const activeCallArray = Array.from(activeCalls)
-
-    for (let i = 0; i < info.length; i++) {
-        if (info[i]._id == idSessionStorage) {
-            activeCallArray[i].classList.add("bg-gray")
-        }
-        else {
-            activeCallArray[i].classList.remove("bg-gray")
-        }
-    }
-
-}
-
 // Add additional apparatus rows, if necessary
-
-const addApparatusRow = async function (info) {
+function addApparatusRow(info) {
     const loopID = function (clone) {  // Loop through childNodes to run function on correct element ids
         for (let i = 1; i < clone.childNodes.length; i += 2) {
             let id = clone.childNodes[i].childNodes[0].id
@@ -149,42 +109,74 @@ const addApparatusRow = async function (info) {
     }
 }
 
-// Localize date and time (client-side, for accuracy)
-
-const localizeDate = function (date) {
-    const utcDate = new Date(date)
-    return utcDate.toLocaleDateString()
-}
-
-const localizeTime = function (date) {
-    const utcDate = new Date(date)
-    return utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
-}
-
-const localizeTimeCallList = function (info) {
-    const callListTimes = document.querySelectorAll('.callListTimes')
-    Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date))
-}
-
 // Remove readonly attribute from inputs with callInfoDataEdit class when call is displayed
-
-const removeReadOnlyAttribute = function () {
+function removeReadOnlyAttribute() {
     const callInfoDataEdit = Array.from(document.querySelectorAll('.callInfoDataEdit'))
     callInfoDataEdit.forEach(elem => elem.removeAttribute('readonly'))
 }
 
 // Remove disabled attribute from save button when call is displayed
-
-const removeDisabledAttribute = function () {
+function removeDisabledAttribute() {
     const saveCallButton = document.querySelector('#saveCallButton')
     const deleteCallButton = document.querySelector('#deleteCallButton')
     saveCallButton.removeAttribute('disabled')
     deleteCallButton.removeAttribute('disabled')
 }
 
-// Input time in apparatus cells
+// Localize date and time (client-side, for accuracy)
+function localizeDate(date) {
+    const utcDate = new Date(date)
+    return utcDate.toLocaleDateString()
+}
 
-const trackApparatusTimes = function () {
+function localizeTime(date) {
+    const utcDate = new Date(date)
+    return utcDate.toLocaleTimeString('en-US', { hourCycle: 'h23' })
+}
+
+function localizeTimeCallList(info) {
+    const callListTimes = document.querySelectorAll('.callListTimes')
+    Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date))
+}
+
+// Create and append each line of callnotes to the DOM
+function appendCallNotes(info) {
+    const callNotes = document.querySelector('#callNotes')
+    Array.from(callNotes.childNodes).forEach(elem => elem.remove()) // Delete call notes from previous displayed call
+    if (info.callNotes) {
+        callNotesArray = Object.values(info.callNotes)
+        callNotesArray = callNotesArray.map(elem => {  // Localize call notes timestamp (client-side, for accuracy)
+            let array = elem.split(': ')
+            let timestamp = array[0]
+            array[0] = localizeTime(timestamp)
+            return array.join(': ')
+        })
+        for (let i = 0; i < callNotesArray.length; i++) {
+            let li = document.createElement('li')
+            const node = document.createTextNode(callNotesArray[i]) // Parse through callNotesObject to create and display a list of call notes
+            li.appendChild(node)
+            callNotes.appendChild(li)
+        }
+    }
+}
+
+// Highlight selected call in call list
+function highlightSelectedCall(info) {
+    const idSessionStorage = sessionStorage.getItem('id')
+    const activeCallArray = Array.from(activeCalls)
+
+    for (let i = 0; i < info.length; i++) {
+        if (info[i]._id == idSessionStorage) {
+            activeCallArray[i].classList.add("bg-gray")
+        }
+        else {
+            activeCallArray[i].classList.remove("bg-gray")
+        }
+    }
+}
+
+// Input time in apparatus cells
+function trackApparatusTimes() {
     const checkEmptyCells = function (elem) {
         if (elem.childNodes[1].childNodes[0].value) {
             elem.childNodes[1].childNodes[0].setAttribute('readonly', '') // For each row, if there is an apparatus saved, disable the apparatus cell
@@ -225,7 +217,6 @@ const trackApparatusTimes = function () {
 }
 
 // Create a new call
-
 const newCallButton = document.querySelector("#newCall")
 const deleteCallButton = document.querySelector("#deleteCallButton")
 newCallButton.addEventListener('click', removeSessionStorage)
@@ -236,6 +227,3 @@ function removeSessionStorage() {
         sessionStorage.removeItem('id') // Sets new id to sessionStorage, so the new call will be active on reload
     }
 }
-
-// Localize calllist times (does not work using EJS, must be local)
-
