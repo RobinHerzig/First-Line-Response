@@ -25,24 +25,5 @@
     </div>
 </footer>
 
-</div>
-<div class="drawer-side">
-    <label for="my-drawer-3" class="drawer-overlay"></label>
-    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
-        <!-- Sidebar content here -->
-        <li><a href="/demo">Demo</a></li>
-        <% if (!user?.id) { %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Signup</a></li>
-            <% } %>
-                <% if (user?.id) { %>
-                    <li><a href="/logout">Logout</a></li>
-                    <% } %>
-    </ul>
-
-</div>
-</div>
-
 </body>
-
 </html>
