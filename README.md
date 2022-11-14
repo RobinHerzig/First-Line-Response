@@ -26,30 +26,40 @@
 <!--     <img src="https://img.shields.io/static/v1?label=|&message=FIREBASE&color=cbb148&style=plastic&logo=firebase"/> -->
 </p>
 
-https:firstlineresponse.onrender.com/
+<p align="center">
+    <a target="_blank" href="https://firstlineresponse.onrender.com/"><img width="50%" src="https://github.com/RobinHerzig/RobinHerzig/blob/main/images/firstlineresponse.png"></a>
+    <br>
+    <a align="center" target="_blank" href="https://firstlineresponse.onrender.com/">First Line Response</a>
+</p>
 
-In emergency services, computer-aided dispatch (CAD) software is used to track calls for service and first responders.
+For 8 years, I worked globally in emergency service communications. In this field we use software called computer-aided dispatch (CAD), which tracks calls for service and first responders. Some systems are extremely sophisticated but smaller agencies, who can't afford them, are limited to pen and paper. Unfortunately, this is an issue because it hurts response times and reliability.
 
-It's utilized by 911 operators who answer incoming calls, prioritize urgency, and dispatch law enforcement, fire, or EMS personnel as required.
+To solve this problem, I'm introducing First Line Response, a web-based CAD app. This is a straight-forward tool that provides the CAD capabilities essential to keeping citizens and first responders safe:
 
-CAD systems are critical for the saftey and wellbeing of both first responders and the citizens they serve.
+- Create new calls as needed.
+- Swap between existing calls.
+- Automatically track call create date, time, and ID.
+- Save and timestamp call notes.
+- Assign multiple apparatus and timestamp movements.
 
 ## How It's Made:
 
-This is a full-stack project utilizing web API's sessionStorage, EJS and MongoDB.
+This is a full-stack project utilizing MongoDB, EJS, and the web API's sessionStorage, EJS.
 
-The "New Call" button sends a POST request that adds a new document to the collection in MongoDB, which loads in the call list using EJS. When selected, client-side JavaScript references its ObjectId to iterate through the collection and populate the form. In addition, the web API sessionStorage saves the ObjectID so that it will automatically reload if the browser is refreshed.
+The "New Call" button sends a POST request that creates a new document in the MongoDB collection. When that call is selected from the calls for service list, client-side JavaScript fetches the database collection and, using the call's ObjectId as a reference, iterates through the data and populates the form.
 
-The document may be modified while it's loaded in the form. To save it, the "Save Call" button uses method-override module to parse each of field and send the data to the server as a POST request inside MongoDB.
+To make the experience more seamless, First Line Response uses sessionStorage to locally remember the current active call. If, for example, the browser refreshes, that call will reload automatically.
+
+EJS is a templating language used to add data to the page server-side. It's used primary to separate HTML partials (e.g., header, navigation, CAD, and footer) to allow for DRYer code. In addition, it allows for conditional rendering, such as displaying certain menu items or notifications when logged in and logged out.
 
 ## Optimizations:
 
-While department budgets towards CAD software varies, upscale variants offer a wide array of options. These include creating unit roles and groups, AVL tracking with map, automatic creation of incident reports and archives, and so much more. Given time, I may look into expanding this project to add some of these features.
+While department budgets towards CAD software varies, upscale variants offer a wide array of options. These include creating unit roles and groups, AVL tracking with map, automatic creation of incident reports and archives, and so much more. Given time, these features may be added to First Line Response.
 
-In addition, one goal is to convert this into a desktop app using <a href="https://www.electronjs.org/">Electron</a>, a framework that allows developers to create native applications using web technologies.
+One goal is to convert this into a desktop app using <a href="https://www.electronjs.org/">Electron</a>, a framework that allows developers to create native applications using web technologies.
 
-Introducing a frontend framework, such as React, would also improve the interactivity of this application. In particular, it would allow for seamless updating of components without requiring a browser refresh.
+Introducing a frontend framework, such as React, would also improve the interactivity of this application.
 
-## Lessons Learned:
+## Installation:
 
-This was another great lesson in Express and MongoDB, as well as how they can communicate to client-side JavaScript. Having multiple objects to iterate through also posed some challenges. 
+Details coming soon!
