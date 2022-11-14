@@ -54,7 +54,7 @@ EJS is a templating language used to add data to the page server-side. It's used
 
 ## Optimizations:
 
-While department budgets towards CAD software varies, upscale variants offer a wide array of options. These include creating unit roles and groups, AVL tracking with map, automatic creation of incident reports and archives, and so much more. Given time, these features may be added to First Line Response.
+While department budgets towards CAD software varies, upscale variants offer a wide array of options. These include creating unit roles and groups, AVL tracking with map, automatic creation of incident reports and archives, and so much more. Given time, these features may be added to First Line Response. Click the "Issues" tab above for more ideas.
 
 One goal is to convert this into a desktop app using <a href="https://www.electronjs.org/">Electron</a>, a framework that allows developers to create native applications using web technologies.
 
@@ -62,4 +62,21 @@ Introducing a frontend framework, such as React, would also improve the interact
 
 ## Installation:
 
-Details coming soon!
+1. Download or clone the repo onto your local machine.
+2. In your terminal, enter `npm install` to download and install the dependencies.
+3. Use MongoDB to create a database:
+    1. Create an account.
+    2. Create a new project.
+    3. Build a database (select the free option).
+    4. Create a cluster. Choose any provider and region.
+    5. Enter a username and password to authenticate your connection. Save this password for later.
+    6. Add your current IP to the "IP Access List" to complete the database creation process.
+4. On the "Database Deployments" page in MongoDB, click Connect > Connect your application. Save the application code for later.
+5. From your local project directory, enter the config folder and create a `.env` file.
+6. Inside the file, paste the following: `DB_STRING = <MongoDB application code>`. Enter the application code where indicated.
+7. Inside the application code is `<password>`. Replace it with the password from earlier.
+8. In the terminal, enter `npm start` to run the local server. Access it via `http://localhost:8000/`.
+
+## Feedback:
+
+Feedback is always welcome! I invite you to message me your comments and ideas using any of the social media listed within my profile.
