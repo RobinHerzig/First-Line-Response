@@ -2203,6 +2203,66 @@ footer {
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 544px) {
+  .csm\:ml-1 {
+    margin-left: 0.25rem;
+  }
+
+  .csm\:table-row {
+    display: table-row;
+  }
+
+  .csm\:flex-row {
+    flex-direction: row;
+  }
+
+  .csm\:text-left {
+    text-align: left;
+  }
+}
+
+@media (min-width: 800px) {
+  .cmd\:ml-1 {
+    margin-left: 0.25rem;
+  }
+
+  .cmd\:inline-block {
+    display: inline-block;
+  }
+
+  .cmd\:aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .cmd\:w-28 {
+    width: 7rem;
+  }
+
+  .cmd\:w-56 {
+    width: 14rem;
+  }
+
+  .cmd\:w-40 {
+    width: 10rem;
+  }
+
+  .cmd\:w-32 {
+    width: 8rem;
+  }
+
+  .cmd\:w-64 {
+    width: 16rem;
+  }
+
+  .cmd\:flex-row {
+    flex-direction: row;
+  }
+
+  .cmd\:p-2 {
+    padding: 0.5rem;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:px-6 {
     padding-left: 1.5rem;
