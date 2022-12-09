@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind screens;
 
 body {
     min-height: 100vh;
@@ -23,27 +24,4 @@ footer {
 
 .bg-gray {
     background: rgb(75 85 99);
-}
-
-@media only screen and (max-width: 1024px) {
-
-    .callInfo fieldset,
-    .callLocation fieldset,
-    .callType fieldset,
-    .callerInfo fieldset {
-        display: flex;
-        flex-flow: column wrap;
-        align-items: center;
-    }
-
-    .callInfo fieldset input,
-    .callLocation fieldset input,
-    .callType fieldset input,
-    .callerInfo fieldset input {
-        width: 215px;
-    }
-
-    .responseDepartment th {
-        display: none;
-    }
 }

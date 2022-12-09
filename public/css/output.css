@@ -1786,12 +1786,8 @@ html {
   margin-left: 4rem;
 }
 
-.ml-3 {
-  margin-left: 0.75rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .mb-px {
@@ -1800,14 +1796,6 @@ html {
 
 .mt-3 {
   margin-top: 0.75rem;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.inline {
-  display: inline;
 }
 
 .flex {
@@ -1820,10 +1808,6 @@ html {
 
 .hidden {
   display: none;
-}
-
-.aspect-square {
-  aspect-ratio: 1 / 1;
 }
 
 .h-6 {
@@ -1854,24 +1838,12 @@ html {
   width: 1.5rem;
 }
 
-.w-12 {
-  width: 3rem;
-}
-
-.w-28 {
-  width: 7rem;
-}
-
-.w-56 {
-  width: 14rem;
-}
-
-.w-32 {
-  width: 8rem;
-}
-
 .w-full {
   width: 100%;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-5 {
@@ -1898,8 +1870,8 @@ html {
   max-width: 42rem;
 }
 
-.max-w-\[120px\] {
-  max-width: 120px;
+.max-w-\[786px\] {
+  max-width: 786px;
 }
 
 .flex-auto {
@@ -1918,6 +1890,10 @@ html {
   flex-shrink: 0;
 }
 
+.basis-9\/12 {
+  flex-basis: 75%;
+}
+
 .list-inside {
   list-style-position: inside;
 }
@@ -1930,16 +1906,12 @@ html {
   list-style-type: disc;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
 
-.place-content-around {
-  place-content: space-around;
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .items-start {
@@ -1948,6 +1920,10 @@ html {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -2043,9 +2019,9 @@ html {
   padding: 0px;
 }
 
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .py-12 {
@@ -2058,13 +2034,12 @@ html {
   padding-right: 1rem;
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
 .pt-3 {
   padding-top: 0.75rem;
+}
+
+.pt-0 {
+  padding-top: 0px;
 }
 
 .pb-3 {
@@ -2075,20 +2050,8 @@ html {
   padding-bottom: 0.25rem;
 }
 
-.pl-2 {
-  padding-left: 0.5rem;
-}
-
 .pl-1 {
   padding-left: 0.25rem;
-}
-
-.pt-0 {
-  padding-top: 0px;
-}
-
-.pb-0 {
-  padding-bottom: 0px;
 }
 
 .text-left {
@@ -2140,24 +2103,16 @@ html {
   text-transform: none;
 }
 
+.leading-snug {
+  line-height: 1.375;
+}
+
 .leading-8 {
   line-height: 2rem;
 }
 
 .leading-6 {
   line-height: 1.5rem;
-}
-
-.leading-normal {
-  line-height: 1.5;
-}
-
-.leading-snug {
-  line-height: 1.375;
-}
-
-.leading-tight {
-  line-height: 1.25;
 }
 
 .tracking-tight {
@@ -2204,55 +2159,6 @@ html {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  margin-top: auto;
-}
-
-.CAD input::-moz-placeholder {
-  color: rgba(166, 173, 186, .5);
-}
-
-.CAD input::placeholder {
-  color: rgba(166, 173, 186, .5);
-}
-
-.CAD input[readonly] {
-  cursor: default;
-  pointer-events: none;
-}
-
-.bg-gray {
-  background: rgb(75 85 99);
-}
-
-@media only screen and (max-width: 1024px) {
-  .callInfo fieldset,
-    .callLocation fieldset,
-    .callType fieldset,
-    .callerInfo fieldset {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-  }
-
-  .callInfo fieldset input,
-    .callLocation fieldset input,
-    .callType fieldset input,
-    .callerInfo fieldset input {
-    width: 215px;
-  }
-
-  .responseDepartment th {
-    display: none;
-  }
 }
 
 .hover\:bg-red-700:hover {
@@ -2337,4 +2243,31 @@ footer {
   .lg\:text-center {
     text-align: center;
   }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.CAD input::-moz-placeholder {
+  color: rgba(166, 173, 186, .5);
+}
+
+.CAD input::placeholder {
+  color: rgba(166, 173, 186, .5);
+}
+
+.CAD input[readonly] {
+  cursor: default;
+  pointer-events: none;
+}
+
+.bg-gray {
+  background: rgb(75 85 99);
 }
