@@ -2161,6 +2161,33 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.CAD input::-moz-placeholder {
+  color: rgba(166, 173, 186, .5);
+}
+
+.CAD input::placeholder {
+  color: rgba(166, 173, 186, .5);
+}
+
+.CAD input[readonly] {
+  cursor: default;
+  pointer-events: none;
+}
+
+.bg-gray {
+  background: rgb(75 85 99);
+}
+
 .hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
@@ -2243,31 +2270,4 @@ html {
   .lg\:text-center {
     text-align: center;
   }
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  margin-top: auto;
-}
-
-.CAD input::-moz-placeholder {
-  color: rgba(166, 173, 186, .5);
-}
-
-.CAD input::placeholder {
-  color: rgba(166, 173, 186, .5);
-}
-
-.CAD input[readonly] {
-  cursor: default;
-  pointer-events: none;
-}
-
-.bg-gray {
-  background: rgb(75 85 99);
 }
