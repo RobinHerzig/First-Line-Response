@@ -1806,6 +1806,10 @@ html {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -1938,6 +1942,10 @@ html {
   place-content: space-around;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -2007,11 +2015,6 @@ html {
   background-color: rgb(22 101 52 / var(--tw-bg-opacity));
 }
 
-.bg-base-100 {
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--b1) / var(--tw-bg-opacity));
-}
-
 .stroke-current {
   stroke: currentColor;
 }
@@ -2055,6 +2058,11 @@ html {
   padding-right: 1rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -2073,6 +2081,14 @@ html {
 
 .pl-1 {
   padding-left: 0.25rem;
+}
+
+.pt-0 {
+  padding-top: 0px;
+}
+
+.pb-0 {
+  padding-bottom: 0px;
 }
 
 .text-left {
@@ -2130,6 +2146,18 @@ html {
 
 .leading-6 {
   line-height: 1.5rem;
+}
+
+.leading-normal {
+  line-height: 1.5;
+}
+
+.leading-snug {
+  line-height: 1.375;
+}
+
+.leading-tight {
+  line-height: 1.25;
 }
 
 .tracking-tight {
@@ -2295,6 +2323,10 @@ footer {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:flex-col {
+    flex-direction: column;
   }
 
   .lg\:px-8 {
