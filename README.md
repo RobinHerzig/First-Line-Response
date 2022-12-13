@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/static/v1?label=|&message=CSS3&color=a33550&style=plastic&logo=css3"/>
 <!--     <img src="https://img.shields.io/static/v1?label=|&message=SASS&color=2b625f&style=plastic&logo=sass"/> -->
 <!--     <img src="https://img.shields.io/static/v1?label=|&message=BOOTSTRAP&color=316c5e&style=plastic&logo=bootstrap"/> -->
-    <img src="https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=35a34d&style=plastic&logo=javascript"/>
+    <img src="https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=a3355&style=plastic&logo=javascript"/>
     <img src="https://img.shields.io/static/v1?label=|&message=NODE.JS&color=35a34d&style=plastic&logo=node.js"/>
     <img src="https://img.shields.io/static/v1?label=|&message=EXPRESS&color=35a34d&style=plastic&logo=express"/>
     <img src="https://img.shields.io/static/v1?label=|&message=EJS&color=35a34d&style=plastic&logo=ejs"/>
@@ -34,13 +34,25 @@
 
 For 8 years, I worked globally in emergency service communications. In this field we use software called computer-aided dispatch (CAD), which tracks calls for service and first responders. Some systems are extremely sophisticated but smaller agencies, who can't afford them, are limited to pen and paper. Unfortunately, this is an issue because it hurts response times and reliability.
 
-To solve this problem, I'm introducing First Line Response, a web-based CAD app. This is a straight-forward tool that provides the CAD capabilities essential to keeping citizens and first responders safe:
+To solve this problem, I'm introducing First Line Response, a web-based CAD app. This is an accessible tool that provides the features essential to keep citizens and first responders safe:
 
 - Create new calls as needed.
 - Swap between existing calls.
 - Automatically track call create date, time, and ID.
 - Save and timestamp call notes.
 - Assign multiple apparatus and timestamp movements.
+
+## Instructions:
+
+As a tool, First Line Response is designed to achieve two main goals. First, it must be equipped to handle simultaneous emergencies. Second, for each individual call, it must automate as much of the logging as possible.
+
+To demonstrate these points, a demo is provided. Feel free to jump right in, but if you’re not familiar with computer-aided dispatch software then I recommend reading through the following brief guide to get started. Each section of the demo will be explained, starting from the top and moving downwards:
+
+- "Calls for Service" contains a list of current calls for service. An arbitrary number of calls are supported. To view call information, just click on the call from the list. Or, if there is a new incoming call, click the red “New Call” button to start a new document.
+- Next, is "Call Information". The fields here, including call time, date, and ID, are populated automatically when a new call is created. As you’ll see here and further below, automatic time tracking is one of the features that makes First Line Response so convenient during stressful scenarios.
+ - "Call Location", "Call Type", and "Caller Information" all operate similarly. These fields are populated by emergency telecommunicators using preliminary information provided by on scene witnesses. When new data is entered, be sure to click the “Save Call” button at the bottom of the document.
+- "Call Notes" is a special field designed to hold miscellaneous updates and call information. To use, enter a note at the bottom of the field and save the call. The note then appears the large box above. Most commonly, these notes contain information provided by first responders as they asses and handle each emergency. Because First Line Response timestamps each entry, they can be used to create a cumulative narrative.
+- "Department Response", the last section, contains all apparatus, or personnel, assigned to a call. Like call notes, begin by entering a vehicle number into the first field and saving the document. A new row will appear, allowing you to enter as many apparatus as required. In addition, each row contains vehicle movement fields, which is a convenient way to track and timestamp movements. Simply click the respected field and save the document. 
 
 ## How It's Made:
 
