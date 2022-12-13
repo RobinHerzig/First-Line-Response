@@ -136,7 +136,7 @@ function localizeTime(date) {
 
 function localizeTimeCallList(info) {
     const callListTimes = document.querySelectorAll('.callListTimes')
-    Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date))
+    Array.from(callListTimes).forEach((elem, index) => elem.textContent = localizeTime(info[index].date) + ":")
 }
 
 // Create and append each line of callnotes to the DOM
