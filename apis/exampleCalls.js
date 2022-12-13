@@ -52,8 +52,8 @@ commercialFireAlarm = {
   "address": "284 2nd St",
   "business": "Corner Store",
   "city": "Dallas",
-  "first": "John",
-  "last": "Smith",
+  "first": "Cody",
+  "last": "Bell",
   "phone": "555 123-4567",
   "type": "Commercial Fire Alarm"
 }
@@ -61,7 +61,7 @@ commercialFireAlarm = {
 MedicalEmergency = {
   "_id": "636555b85747b8344cde4d17",
   "callNotes": [
-    "Fri Nov 04 2022 13:35:04 GMT-0500 (Central Daylight Time): Male stubbed toe, requesting medics",
+    "Fri Nov 04 2022 13:35:04 GMT-0500 (Central Daylight Time): 89yo male fallen, requesting medics",
     "Fri Nov 04 2022 13:35:25 GMT-0500 (Central Daylight Time): Conscious and breathing",
     "Fri Nov 04 2022 13:38:07 GMT-0500 (Central Daylight Time): Medic10 patient contact",
   ],
@@ -102,8 +102,8 @@ MedicalEmergency = {
   "address": "2669 Main St",
   "business": "",
   "city": "Dallas",
-  "first": "Jane",
-  "last": "Doe",
+  "first": "Brenda",
+  "last": "White",
   "phone": "555 123-8637",
   "type": "Medical Emergency"
 }
